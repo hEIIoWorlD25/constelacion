@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,7 +9,17 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Nuestro primer beso ❤️</title>
+    <title>Nuestro primer beso ✨</title>
+
+    <meta
+        property="og:title"
+        content="Nuestro primer beso ✨"
+    >
+
+    <meta
+        property="og:description"
+        content="Hay fechas que uno nunca olvida ❤️"
+    >
 
     <style>
 
@@ -35,7 +44,7 @@
 
 
         /* =========================
-           PANTALLA INICIAL
+           PANTALLA DE ENTRADA
         ========================= */
 
         #intro {
@@ -44,15 +53,13 @@
 
             inset: 0;
 
-            background: #000;
-
             display: flex;
-
-            flex-direction: column;
 
             justify-content: center;
 
             align-items: center;
+
+            background: #000;
 
             z-index: 100;
 
@@ -69,48 +76,87 @@
             visibility: hidden;
 
             pointer-events: none;
-
         }
 
 
-        .intro-text {
+        .login-box {
+
+            width: min(
+                90vw,
+                400px
+            );
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+
+        .small-text {
+
+            font-size: 13px;
+
+            letter-spacing: 3px;
+
+            color: #aaa;
+
+            margin-bottom: 18px;
+        }
+
+
+        .login-box h1 {
 
             font-size:
                 clamp(
-                    16px,
-                    4vw,
-                    21px
+                    21px,
+                    6vw,
+                    30px
                 );
 
-            letter-spacing: 4px;
+            font-weight: 400;
 
-            margin-bottom: 35px;
+            letter-spacing: 2px;
 
-            opacity: .8;
-
-            animation:
-                fadeText
-                2s
-                ease-in-out
-                infinite alternate;
-
+            margin-bottom: 12px;
         }
 
 
-        @keyframes fadeText {
+        .subtitle {
 
-            from {
-                opacity: .45;
-            }
+            font-size: 14px;
 
-            to {
-                opacity: 1;
-            }
+            color: #aaa;
 
+            margin-bottom: 30px;
         }
 
 
-        #playMusic {
+
+        /* =========================
+           INPUT DE FECHA
+        ========================= */
+
+        .date-wrapper {
+
+            margin-bottom: 20px;
+        }
+
+
+        input[type="date"] {
+
+            width: 100%;
+
+            padding:
+                15px
+                18px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .05
+                );
 
             border:
                 1px solid
@@ -118,52 +164,158 @@
                     255,
                     255,
                     255,
-                    .7
+                    .45
                 );
-
-            background:
-                transparent;
 
             color: white;
 
-            padding:
-                14px
-                28px;
+            border-radius: 12px;
 
-            border-radius:
-                50px;
+            font-size: 16px;
 
-            font-size:
-                15px;
+            letter-spacing: 1px;
 
-            letter-spacing:
-                2px;
+            outline: none;
 
-            cursor: pointer;
+            color-scheme: dark;
 
-            transition:
-                all .4s ease;
-
+            transition: .3s ease;
         }
 
 
-        #playMusic:hover {
+        input[type="date"]:focus {
 
-            background:
-                white;
+            border-color: white;
 
-            color:
-                black;
+            box-shadow:
+                0 0 15px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .15
+                );
+        }
+
+
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        #enterButton {
+
+            width: 100%;
+
+            padding:
+                14px
+                20px;
+
+            border:
+                1px solid white;
+
+            border-radius: 40px;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition: .35s ease;
+        }
+
+
+        #enterButton:hover {
+
+            background: white;
+
+            color: black;
 
             transform:
-                scale(1.05);
+                translateY(-2px);
+        }
+
+
+
+        /* =========================
+           MENSAJE DE ERROR
+        ========================= */
+
+        #errorMessage {
+
+            min-height: 25px;
+
+            margin-top: 18px;
+
+            color: #aaa;
+
+            font-size: 13px;
+
+            letter-spacing: 1px;
+
+            opacity: 0;
+
+            transition: opacity .4s ease;
+        }
+
+
+        #errorMessage.visible {
+
+            opacity: 1;
+        }
+
+
+
+        /* =========================
+           EFECTO ERROR
+        ========================= */
+
+        .shake {
+
+            animation:
+                shake
+                .4s ease;
+        }
+
+
+        @keyframes shake {
+
+            0% {
+                transform:
+                    translateX(0);
+            }
+
+            25% {
+                transform:
+                    translateX(-7px);
+            }
+
+            50% {
+                transform:
+                    translateX(7px);
+            }
+
+            75% {
+                transform:
+                    translateX(-4px);
+            }
+
+            100% {
+                transform:
+                    translateX(0);
+            }
 
         }
 
 
 
         /* =========================
-           FONDO DE ESTRELLAS
+           FONDO ESTRELLADO
         ========================= */
 
         #stars {
@@ -176,16 +328,27 @@
             width: 100%;
             height: 100%;
 
-            z-index: 0;
-
             pointer-events: none;
 
+            z-index: 0;
+
+            opacity: 0;
+
+            transition:
+                opacity
+                2.5s ease;
+        }
+
+
+        #stars.visible {
+
+            opacity: 1;
         }
 
 
 
         /* =========================
-           CONTENIDO
+           CONTENIDO PRINCIPAL
         ========================= */
 
         #mainContent {
@@ -205,12 +368,13 @@
             opacity: 0;
 
             transform:
-                scale(.97);
+                scale(.96);
 
             transition:
-                opacity 2.5s ease,
-                transform 2.5s ease;
-
+                opacity
+                2.5s ease,
+                transform
+                2.5s ease;
         }
 
 
@@ -220,7 +384,6 @@
 
             transform:
                 scale(1);
-
         }
 
 
@@ -231,13 +394,13 @@
 
         .constellation-container {
 
+            position: relative;
+
             width:
                 min(
-                    94vw,
+                    96vw,
                     620px
                 );
-
-            position: relative;
 
             display: flex;
 
@@ -250,7 +413,6 @@
                 7s
                 ease-in-out
                 infinite;
-
         }
 
 
@@ -276,7 +438,6 @@
                         .15
                     )
                 );
-
         }
 
 
@@ -286,7 +447,7 @@
             0% {
 
                 transform:
-                    translateY(0px)
+                    translateY(0)
                     scale(1);
 
             }
@@ -294,7 +455,7 @@
             50% {
 
                 transform:
-                    translateY(-7px)
+                    translateY(-8px)
                     scale(1.005);
 
             }
@@ -302,17 +463,16 @@
             100% {
 
                 transform:
-                    translateY(0px)
+                    translateY(0)
                     scale(1);
 
             }
-
         }
 
 
 
         /* =========================
-           ESTRELLAS BRILLANTES
+           BRILLOS
         ========================= */
 
         .sparkle {
@@ -322,16 +482,14 @@
             width: 3px;
             height: 3px;
 
-            background: white;
-
             border-radius: 50%;
+
+            background: white;
 
             opacity: 0;
 
-            pointer-events: none;
-
             box-shadow:
-                0 0 5px white,
+                0 0 4px white,
                 0 0 10px white;
 
             animation:
@@ -339,6 +497,7 @@
                 3s
                 infinite;
 
+            pointer-events: none;
         }
 
 
@@ -359,10 +518,9 @@
                 opacity: 1;
 
                 transform:
-                    scale(1.8);
+                    scale(1.7);
 
             }
-
         }
 
 
@@ -375,10 +533,17 @@
             max-width: 600px
         ) {
 
+            .login-box {
+
+                padding:
+                    25px
+                    18px;
+
+            }
+
             .constellation-container {
 
-                width:
-                    98vw;
+                width: 98vw;
 
             }
 
@@ -388,32 +553,60 @@
 
 </head>
 
-
 <body>
 
 
     <!-- =========================
-         PANTALLA INICIAL
+         PANTALLA DE FECHA
     ========================= -->
 
-    <div id="intro">
+    <section id="intro">
 
-        <p class="intro-text">
-            Antes de continuar...
-        </p>
+        <div
+            class="login-box"
+            id="loginBox"
+        >
 
-        <button id="playMusic">
+            <p class="small-text">
+                SOLO TÚ SABES LA RESPUESTA
+            </p>
 
-            ♫ Reproducir música
+            <h1>
+                ¿Qué día comenzó nuestra historia?
+            </h1>
 
-        </button>
+            <p class="subtitle">
+                Ingresa una fecha que nunca quiero olvidar.
+            </p>
 
-    </div>
+
+            <div class="date-wrapper">
+
+                <input
+                    type="date"
+                    id="specialDate"
+                >
+
+            </div>
+
+
+            <button id="enterButton">
+                ENTRAR ♡
+            </button>
+
+
+            <p id="errorMessage">
+                Esa no es nuestra fecha 🤍
+            </p>
+
+        </div>
+
+    </section>
 
 
 
     <!-- =========================
-         ESTRELLAS DE FONDO
+         FONDO DE ESTRELLAS
     ========================= -->
 
     <canvas id="stars"></canvas>
@@ -421,7 +614,7 @@
 
 
     <!-- =========================
-         CONTENIDO PRINCIPAL
+         CONSTELACIÓN
     ========================= -->
 
     <main id="mainContent">
@@ -433,8 +626,8 @@
 
             <img
                 src="assets/constelacion.png"
-                class="constellation"
                 alt="Nuestro primer beso"
+                class="constellation"
             >
 
         </div>
@@ -444,7 +637,7 @@
 
 
     <!-- =========================
-         MÚSICA
+         AUDIO
     ========================= -->
 
     <audio
@@ -465,9 +658,22 @@
 <script>
 
 
-/* ================================
-   MÚSICA + ENTRADA
-================================ */
+/* ==========================================
+   FECHA CORRECTA
+========================================== */
+
+/*
+La fecha del primer beso:
+
+20 de mayo de 2026
+
+Formato interno:
+AAAA-MM-DD
+*/
+
+const correctDate =
+    "2026-05-20";
+
 
 
 const intro =
@@ -476,9 +682,27 @@ const intro =
     );
 
 
-const playMusic =
+const loginBox =
     document.getElementById(
-        "playMusic"
+        "loginBox"
+    );
+
+
+const dateInput =
+    document.getElementById(
+        "specialDate"
+    );
+
+
+const enterButton =
+    document.getElementById(
+        "enterButton"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
     );
 
 
@@ -494,62 +718,160 @@ const mainContent =
     );
 
 
+const starsCanvas =
+    document.getElementById(
+        "stars"
+    );
 
-playMusic.addEventListener(
 
-    "click",
 
-    async () => {
+/* ==========================================
+   VALIDAR FECHA
+========================================== */
 
+
+async function validateDate() {
+
+
+    const enteredDate =
+        dateInput.value;
+
+
+    if (
+        enteredDate === correctDate
+    ) {
+
+
+        /*
+        Ocultamos cualquier error.
+        */
+
+        errorMessage.classList.remove(
+            "visible"
+        );
+
+
+        /*
+        Iniciamos la música.
+        */
 
         try {
 
-
-            /* Comienza la música */
-
             await music.play();
-
-
-
-            /* Ocultamos pantalla inicial */
-
-            intro.classList.add(
-                "hidden"
-            );
-
-
-
-            /*
-            Esperamos un poquito
-            para que la transición
-            se vea elegante.
-            */
-
-            setTimeout(
-
-                () => {
-
-                    mainContent.classList.add(
-                        "visible"
-                    );
-
-                },
-
-                400
-
-            );
-
 
         }
 
         catch (error) {
 
-
-            console.error(
-                "No se pudo reproducir la música",
+            console.log(
+                "No se pudo iniciar el audio:",
                 error
             );
 
+        }
+
+
+        /*
+        Desaparece el acceso.
+        */
+
+        intro.classList.add(
+            "hidden"
+        );
+
+
+        /*
+        Aparecen las estrellas.
+        */
+
+        starsCanvas.classList.add(
+            "visible"
+        );
+
+
+        /*
+        Aparece lentamente
+        la constelación.
+        */
+
+        setTimeout(
+
+            () => {
+
+                mainContent.classList.add(
+                    "visible"
+                );
+
+            },
+
+            500
+
+        );
+
+
+    }
+
+    else {
+
+
+        /*
+        Mensaje si falla.
+        */
+
+        errorMessage.classList.add(
+            "visible"
+        );
+
+
+        /*
+        Pequeña vibración.
+        */
+
+        loginBox.classList.remove(
+            "shake"
+        );
+
+
+        void loginBox.offsetWidth;
+
+
+        loginBox.classList.add(
+            "shake"
+        );
+
+
+    }
+
+}
+
+
+
+enterButton.addEventListener(
+
+    "click",
+
+    validateDate
+
+);
+
+
+
+/*
+También permite presionar ENTER.
+*/
+
+dateInput.addEventListener(
+
+    "keydown",
+
+    event => {
+
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            validateDate();
 
         }
 
@@ -560,9 +882,9 @@ playMusic.addEventListener(
 
 
 
-/* ================================
-   ESTRELLAS DEL FONDO
-================================ */
+/* ==========================================
+   ESTRELLAS DE FONDO
+========================================== */
 
 
 const canvas =
@@ -580,7 +902,6 @@ const ctx =
 let stars = [];
 
 
-
 function resizeCanvas() {
 
     canvas.width =
@@ -590,7 +911,6 @@ function resizeCanvas() {
         window.innerHeight;
 
 }
-
 
 
 resizeCanvas();
@@ -624,13 +944,14 @@ function createStars() {
         Math.floor(
 
             (
-                window.innerWidth *
+                window.innerWidth
+                *
                 window.innerHeight
             )
 
             /
 
-            9000
+            8500
 
         );
 
@@ -672,7 +993,9 @@ function createStars() {
                 .005,
 
             direction:
-                Math.random() > .5
+                Math.random()
+                >
+                .5
                 ?
                 1
                 :
@@ -687,7 +1010,6 @@ function createStars() {
 }
 
 
-
 createStars();
 
 
@@ -698,9 +1020,11 @@ function animateStars() {
     ctx.clearRect(
 
         0,
+
         0,
 
         canvas.width,
+
         canvas.height
 
     );
@@ -780,18 +1104,16 @@ function animateStars() {
         animateStars
     );
 
-
 }
-
 
 
 animateStars();
 
 
 
-/* ================================
+/* ==========================================
    BRILLOS SOBRE CONSTELACIÓN
-================================ */
+========================================== */
 
 
 const constellation =
@@ -799,7 +1121,6 @@ const constellation =
     document.getElementById(
         "constellation"
     );
-
 
 
 function createSparkles() {
@@ -886,7 +1207,6 @@ function createSparkles() {
 
 
 }
-
 
 
 createSparkles();
