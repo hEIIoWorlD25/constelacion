@@ -43,9 +43,9 @@
         }
 
 
-        /* =========================
-           PANTALLA DE ENTRADA
-        ========================= */
+        /* =====================================
+           PANTALLA INICIAL
+        ===================================== */
 
         #intro {
 
@@ -66,6 +66,7 @@
             transition:
                 opacity 1.5s ease,
                 visibility 1.5s ease;
+
         }
 
 
@@ -76,6 +77,7 @@
             visibility: hidden;
 
             pointer-events: none;
+
         }
 
 
@@ -89,18 +91,20 @@
             text-align: center;
 
             padding: 30px;
+
         }
 
 
         .small-text {
 
-            font-size: 13px;
+            font-size: 12px;
 
             letter-spacing: 3px;
 
             color: #aaa;
 
             margin-bottom: 18px;
+
         }
 
 
@@ -117,7 +121,10 @@
 
             letter-spacing: 2px;
 
-            margin-bottom: 12px;
+            line-height: 1.3;
+
+            margin-bottom: 15px;
+
         }
 
 
@@ -125,20 +132,23 @@
 
             font-size: 14px;
 
-            color: #aaa;
+            color: #999;
+
+            line-height: 1.6;
 
             margin-bottom: 30px;
+
         }
 
 
-
-        /* =========================
+        /* =====================================
            INPUT DE FECHA
-        ========================= */
+        ===================================== */
 
         .date-wrapper {
 
             margin-bottom: 20px;
+
         }
 
 
@@ -146,16 +156,14 @@
 
             width: 100%;
 
-            padding:
-                15px
-                18px;
+            padding: 15px 18px;
 
             background:
                 rgba(
                     255,
                     255,
                     255,
-                    .05
+                    0.04
                 );
 
             border:
@@ -164,7 +172,7 @@
                     255,
                     255,
                     255,
-                    .45
+                    0.45
                 );
 
             color: white;
@@ -173,13 +181,14 @@
 
             font-size: 16px;
 
-            letter-spacing: 1px;
-
             outline: none;
 
             color-scheme: dark;
 
-            transition: .3s ease;
+            transition:
+                border-color .3s ease,
+                box-shadow .3s ease;
+
         }
 
 
@@ -188,37 +197,34 @@
             border-color: white;
 
             box-shadow:
-                0 0 15px
+                0 0 20px
                 rgba(
                     255,
                     255,
                     255,
-                    .15
+                    .12
                 );
+
         }
 
 
-
-        /* =========================
+        /* =====================================
            BOTÓN
-        ========================= */
+        ===================================== */
 
         #enterButton {
 
             width: 100%;
 
-            padding:
-                14px
-                20px;
-
-            border:
-                1px solid white;
-
-            border-radius: 40px;
+            padding: 14px 20px;
 
             background: transparent;
 
             color: white;
+
+            border: 1px solid white;
+
+            border-radius: 40px;
 
             font-size: 14px;
 
@@ -226,7 +232,9 @@
 
             cursor: pointer;
 
-            transition: .35s ease;
+            transition:
+                all .35s ease;
+
         }
 
 
@@ -238,13 +246,13 @@
 
             transform:
                 translateY(-2px);
+
         }
 
 
-
-        /* =========================
-           MENSAJE DE ERROR
-        ========================= */
+        /* =====================================
+           MENSAJE ERROR
+        ===================================== */
 
         #errorMessage {
 
@@ -260,26 +268,25 @@
 
             opacity: 0;
 
-            transition: opacity .4s ease;
+            transition:
+                opacity .4s ease;
+
         }
 
 
         #errorMessage.visible {
 
             opacity: 1;
+
         }
 
-
-
-        /* =========================
-           EFECTO ERROR
-        ========================= */
 
         .shake {
 
             animation:
                 shake
                 .4s ease;
+
         }
 
 
@@ -313,17 +320,15 @@
         }
 
 
-
-        /* =========================
+        /* =====================================
            FONDO ESTRELLADO
-        ========================= */
+        ===================================== */
 
         #stars {
 
             position: fixed;
 
-            top: 0;
-            left: 0;
+            inset: 0;
 
             width: 100%;
             height: 100%;
@@ -335,21 +340,21 @@
             opacity: 0;
 
             transition:
-                opacity
-                2.5s ease;
+                opacity 2.5s ease;
+
         }
 
 
         #stars.visible {
 
             opacity: 1;
+
         }
 
 
-
-        /* =========================
+        /* =====================================
            CONTENIDO PRINCIPAL
-        ========================= */
+        ===================================== */
 
         #mainContent {
 
@@ -365,16 +370,19 @@
 
             z-index: 2;
 
+            padding:
+                20px
+                10px;
+
             opacity: 0;
 
             transform:
                 scale(.96);
 
             transition:
-                opacity
-                2.5s ease,
-                transform
-                2.5s ease;
+                opacity 2.5s ease,
+                transform 2.5s ease;
+
         }
 
 
@@ -384,17 +392,15 @@
 
             transform:
                 scale(1);
+
         }
 
 
+        /* =====================================
+           ESCENA 3D
+        ===================================== */
 
-        /* =========================
-           CONSTELACIÓN
-        ========================= */
-
-        .constellation-container {
-
-            position: relative;
+        .constellation-scene {
 
             width:
                 min(
@@ -402,21 +408,55 @@
                     620px
                 );
 
+            perspective: 1200px;
+
+            perspective-origin:
+                center center;
+
             display: flex;
 
             justify-content: center;
 
             align-items: center;
 
-            animation:
-                floating
-                7s
-                ease-in-out
-                infinite;
         }
 
 
+        .constellation-container {
+
+            position: relative;
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            transform-style: preserve-3d;
+
+            transform:
+                rotateX(0deg)
+                rotateY(0deg);
+
+            transition:
+                transform
+                .18s
+                ease-out;
+
+            will-change: transform;
+
+        }
+
+
+        /* =====================================
+           IMAGEN CONSTELACIÓN
+        ===================================== */
+
         .constellation {
+
+            position: relative;
 
             width: 100%;
 
@@ -424,62 +464,105 @@
 
             display: block;
 
+            z-index: 3;
+
+            transform:
+                translateZ(42px);
+
             user-select: none;
 
             pointer-events: none;
 
             filter:
+
                 drop-shadow(
-                    0 0 10px
+                    0px
+                    20px
+                    20px
+                    rgba(
+                        0,
+                        0,
+                        0,
+                        .7
+                    )
+                )
+
+                drop-shadow(
+                    0
+                    0
+                    12px
                     rgba(
                         255,
                         255,
                         255,
-                        .15
+                        .14
                     )
                 );
+
         }
 
 
+        /* =====================================
+           RESPLANDOR DETRÁS
+        ===================================== */
 
-        @keyframes floating {
+        .back-glow {
 
-            0% {
+            position: absolute;
 
-                transform:
-                    translateY(0)
-                    scale(1);
+            width: 78%;
+            height: 78%;
 
-            }
+            border-radius: 50%;
 
-            50% {
+            background:
 
-                transform:
-                    translateY(-8px)
-                    scale(1.005);
+                radial-gradient(
+                    circle,
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        .12
+                    )
+                    0%,
 
-            }
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        .04
+                    )
+                    35%,
 
-            100% {
+                    transparent
+                    72%
+                );
 
-                transform:
-                    translateY(0)
-                    scale(1);
+            filter:
+                blur(35px);
 
-            }
+            transform:
+                translateZ(-40px)
+                scale(.95);
+
+            z-index: 1;
+
+            pointer-events: none;
+
         }
 
 
-
-        /* =========================
-           BRILLOS
-        ========================= */
+        /* =====================================
+           BRILLOS SOBRE CONSTELACIÓN
+        ===================================== */
 
         .sparkle {
 
             position: absolute;
 
             width: 3px;
+
             height: 3px;
 
             border-radius: 50%;
@@ -488,16 +571,35 @@
 
             opacity: 0;
 
+            z-index: 5;
+
+            pointer-events: none;
+
             box-shadow:
+
                 0 0 4px white,
-                0 0 10px white;
+
+                0 0 10px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .9
+                ),
+
+                0 0 18px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .4
+                );
 
             animation:
                 sparkle
                 3s
                 infinite;
 
-            pointer-events: none;
         }
 
 
@@ -508,8 +610,7 @@
 
                 opacity: 0;
 
-                transform:
-                    scale(.5);
+                scale: .5;
 
             }
 
@@ -517,17 +618,16 @@
 
                 opacity: 1;
 
-                transform:
-                    scale(1.7);
+                scale: 1.8;
 
             }
+
         }
 
 
-
-        /* =========================
+        /* =====================================
            CELULAR
-        ========================= */
+        ===================================== */
 
         @media (
             max-width: 600px
@@ -541,9 +641,18 @@
 
             }
 
-            .constellation-container {
+
+            .constellation-scene {
 
                 width: 98vw;
+
+            }
+
+
+            #mainContent {
+
+                padding:
+                    5px;
 
             }
 
@@ -553,12 +662,13 @@
 
 </head>
 
+
 <body>
 
 
-    <!-- =========================
-         PANTALLA DE FECHA
-    ========================= -->
+    <!-- =====================================
+         PANTALLA DE ENTRADA
+    ====================================== -->
 
     <section id="intro">
 
@@ -571,9 +681,11 @@
                 SOLO TÚ SABES LA RESPUESTA
             </p>
 
+
             <h1>
                 ¿Qué día comenzó nuestra historia?
             </h1>
+
 
             <p class="subtitle">
                 Ingresa una fecha que nunca quiero olvidar.
@@ -605,30 +717,37 @@
 
 
 
-    <!-- =========================
+    <!-- =====================================
          FONDO DE ESTRELLAS
-    ========================= -->
+    ====================================== -->
 
     <canvas id="stars"></canvas>
 
 
 
-    <!-- =========================
+    <!-- =====================================
          CONSTELACIÓN
-    ========================= -->
+    ====================================== -->
 
     <main id="mainContent">
 
-        <div
-            class="constellation-container"
-            id="constellation"
-        >
+        <div class="constellation-scene">
 
-            <img
-                src="assets/constelacion.png"
-                alt="Nuestro primer beso"
-                class="constellation"
+            <div
+                class="constellation-container"
+                id="constellation3D"
             >
+
+                <div class="back-glow"></div>
+
+
+                <img
+                    src="assets/constelacion.png"
+                    alt="Nuestro primer beso"
+                    class="constellation"
+                >
+
+            </div>
 
         </div>
 
@@ -636,9 +755,9 @@
 
 
 
-    <!-- =========================
-         AUDIO
-    ========================= -->
+    <!-- =====================================
+         MÚSICA
+    ====================================== -->
 
     <audio
         id="music"
@@ -662,12 +781,12 @@
    FECHA CORRECTA
 ========================================== */
 
-/*
-La fecha del primer beso:
 
+/*
 20 de mayo de 2026
 
-Formato interno:
+Formato:
+
 AAAA-MM-DD
 */
 
@@ -724,11 +843,16 @@ const starsCanvas =
     );
 
 
+const constellation3D =
+    document.getElementById(
+        "constellation3D"
+    );
+
+
 
 /* ==========================================
    VALIDAR FECHA
 ========================================== */
-
 
 async function validateDate() {
 
@@ -742,20 +866,20 @@ async function validateDate() {
     ) {
 
 
-        /*
-        Ocultamos cualquier error.
-        */
-
         errorMessage.classList.remove(
             "visible"
         );
 
 
         /*
-        Iniciamos la música.
+        Empieza la música.
+        Al tener LOOP, volverá
+        a comenzar automáticamente.
         */
 
         try {
+
+            music.currentTime = 0;
 
             await music.play();
 
@@ -764,7 +888,7 @@ async function validateDate() {
         catch (error) {
 
             console.log(
-                "No se pudo iniciar el audio:",
+                "No se pudo iniciar la música:",
                 error
             );
 
@@ -772,7 +896,8 @@ async function validateDate() {
 
 
         /*
-        Desaparece el acceso.
+        Desaparece la pantalla
+        de acceso.
         */
 
         intro.classList.add(
@@ -781,7 +906,7 @@ async function validateDate() {
 
 
         /*
-        Aparecen las estrellas.
+        Aparece fondo de estrellas.
         */
 
         starsCanvas.classList.add(
@@ -790,8 +915,7 @@ async function validateDate() {
 
 
         /*
-        Aparece lentamente
-        la constelación.
+        Aparece la constelación.
         */
 
         setTimeout(
@@ -804,7 +928,7 @@ async function validateDate() {
 
             },
 
-            500
+            450
 
         );
 
@@ -814,18 +938,10 @@ async function validateDate() {
     else {
 
 
-        /*
-        Mensaje si falla.
-        */
-
         errorMessage.classList.add(
             "visible"
         );
 
-
-        /*
-        Pequeña vibración.
-        */
 
         loginBox.classList.remove(
             "shake"
@@ -842,6 +958,7 @@ async function validateDate() {
 
     }
 
+
 }
 
 
@@ -855,10 +972,6 @@ enterButton.addEventListener(
 );
 
 
-
-/*
-También permite presionar ENTER.
-*/
 
 dateInput.addEventListener(
 
@@ -883,7 +996,7 @@ dateInput.addEventListener(
 
 
 /* ==========================================
-   ESTRELLAS DE FONDO
+   FONDO DE ESTRELLAS
 ========================================== */
 
 
@@ -902,15 +1015,20 @@ const ctx =
 let stars = [];
 
 
+
 function resizeCanvas() {
+
 
     canvas.width =
         window.innerWidth;
 
+
     canvas.height =
         window.innerHeight;
 
+
 }
+
 
 
 resizeCanvas();
@@ -923,9 +1041,11 @@ window.addEventListener(
 
     () => {
 
+
         resizeCanvas();
 
         createStars();
+
 
     }
 
@@ -988,9 +1108,9 @@ function createStars() {
             speed:
                 Math.random()
                 *
-                .015
+                .012
                 +
-                .005,
+                .004,
 
             direction:
                 Math.random()
@@ -1008,6 +1128,7 @@ function createStars() {
 
 
 }
+
 
 
 createStars();
@@ -1046,9 +1167,11 @@ function animateStars() {
                 star.opacity >= 1
             ) {
 
+
                 star.opacity = 1;
 
                 star.direction = -1;
+
 
             }
 
@@ -1057,9 +1180,11 @@ function animateStars() {
                 star.opacity <= .15
             ) {
 
+
                 star.opacity = .15;
 
                 star.direction = 1;
+
 
             }
 
@@ -1104,7 +1229,9 @@ function animateStars() {
         animateStars
     );
 
+
 }
+
 
 
 animateStars();
@@ -1116,17 +1243,10 @@ animateStars();
 ========================================== */
 
 
-const constellation =
-
-    document.getElementById(
-        "constellation"
-    );
-
-
 function createSparkles() {
 
 
-    const amount = 30;
+    const amount = 32;
 
 
     for (
@@ -1148,14 +1268,20 @@ function createSparkles() {
         );
 
 
+        /*
+        Las posiciones se concentran
+        donde está el círculo principal
+        de tu imagen.
+        */
+
         sparkle.style.left =
 
             (
-                15
+                14
                 +
                 Math.random()
                 *
-                70
+                72
             )
             +
             "%";
@@ -1164,11 +1290,11 @@ function createSparkles() {
         sparkle.style.top =
 
             (
-                8
+                7
                 +
                 Math.random()
                 *
-                65
+                63
             )
             +
             "%";
@@ -1198,7 +1324,27 @@ function createSparkles() {
             "s";
 
 
-        constellation.appendChild(
+        /*
+        Algunas estrellas quedan
+        un poco más adelante.
+        */
+
+        sparkle.style.transform =
+
+            `
+            translateZ(
+                ${
+                    55
+                    +
+                    Math.random()
+                    *
+                    50
+                }px
+            )
+            `;
+
+
+        constellation3D.appendChild(
             sparkle
         );
 
@@ -1209,7 +1355,256 @@ function createSparkles() {
 }
 
 
+
 createSparkles();
+
+
+
+/* ==========================================
+   EFECTO 3D CON EL MOUSE
+========================================== */
+
+
+document.addEventListener(
+
+    "mousemove",
+
+    event => {
+
+
+        /*
+        Solo hacemos el efecto
+        cuando ya se ha ingresado.
+        */
+
+        if (
+            !mainContent.classList.contains(
+                "visible"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const centerX =
+            window.innerWidth / 2;
+
+
+        const centerY =
+            window.innerHeight / 2;
+
+
+        const mouseX =
+            event.clientX
+            -
+            centerX;
+
+
+        const mouseY =
+            event.clientY
+            -
+            centerY;
+
+
+        /*
+        Inclinación máxima:
+        aproximadamente 6 grados.
+        */
+
+        const rotateY =
+
+            (
+                mouseX
+                /
+                centerX
+            )
+
+            *
+            6;
+
+
+        const rotateX =
+
+            -(
+
+                mouseY
+                /
+                centerY
+
+            )
+
+            *
+            6;
+
+
+        constellation3D.style.transform =
+
+            `
+            rotateX(
+                ${rotateX}deg
+            )
+
+            rotateY(
+                ${rotateY}deg
+            )
+            `;
+
+
+    }
+
+);
+
+
+
+/* ==========================================
+   VOLVER AL CENTRO
+========================================== */
+
+
+document.addEventListener(
+
+    "mouseleave",
+
+    () => {
+
+
+        constellation3D.style.transform =
+
+            `
+            rotateX(0deg)
+            rotateY(0deg)
+            `;
+
+
+    }
+
+);
+
+
+
+/* ==========================================
+   EFECTO 3D EN CELULAR
+========================================== */
+
+
+document.addEventListener(
+
+    "touchmove",
+
+    event => {
+
+
+        if (
+            !mainContent.classList.contains(
+                "visible"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        const touch =
+            event.touches[0];
+
+
+        if (!touch) {
+
+            return;
+
+        }
+
+
+        const centerX =
+            window.innerWidth / 2;
+
+
+        const centerY =
+            window.innerHeight / 2;
+
+
+        const touchX =
+            touch.clientX
+            -
+            centerX;
+
+
+        const touchY =
+            touch.clientY
+            -
+            centerY;
+
+
+        const rotateY =
+
+            (
+                touchX
+                /
+                centerX
+            )
+
+            *
+            5;
+
+
+        const rotateX =
+
+            -(
+
+                touchY
+                /
+                centerY
+
+            )
+
+            *
+            5;
+
+
+        constellation3D.style.transform =
+
+            `
+            rotateX(
+                ${rotateX}deg
+            )
+
+            rotateY(
+                ${rotateY}deg
+            )
+            `;
+
+
+    },
+
+    {
+        passive: true
+    }
+
+);
+
+
+
+document.addEventListener(
+
+    "touchend",
+
+    () => {
+
+
+        constellation3D.style.transform =
+
+            `
+            rotateX(0deg)
+            rotateY(0deg)
+            `;
+
+
+    }
+
+);
 
 
 </script>
