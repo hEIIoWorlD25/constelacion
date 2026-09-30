@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Nuestro primer beso ❤️</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            background: #000;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           PANTALLA INICIAL
+        ========================= */
+
+        #intro {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: #000;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 100;
+
+            transition:
+                opacity 1.5s ease,
+                visibility 1.5s ease;
+        }
+
+
+        #intro.hidden {
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+        }
+
+
+        .intro-text {
+
+            font-size:
+                clamp(
+                    16px,
+                    4vw,
+                    21px
+                );
+
+            letter-spacing: 4px;
+
+            margin-bottom: 35px;
+
+            opacity: .8;
+
+            animation:
+                fadeText
+                2s
+                ease-in-out
+                infinite alternate;
+
+        }
+
+
+        @keyframes fadeText {
+
+            from {
+                opacity: .45;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        #playMusic {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .7
+                );
+
+            background:
+                transparent;
+
+            color: white;
+
+            padding:
+                14px
+                28px;
+
+            border-radius:
+                50px;
+
+            font-size:
+                15px;
+
+            letter-spacing:
+                2px;
+
+            cursor: pointer;
+
+            transition:
+                all .4s ease;
+
+        }
+
+
+        #playMusic:hover {
+
+            background:
+                white;
+
+            color:
+                black;
+
+            transform:
+                scale(1.05);
+
+        }
+
+
+
+        /* =========================
+           FONDO DE ESTRELLAS
+        ========================= */
+
+        #stars {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+        }
+
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        #mainContent {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            position: relative;
+
+            z-index: 2;
+
+            opacity: 0;
+
+            transform:
+                scale(.97);
+
+            transition:
+                opacity 2.5s ease,
+                transform 2.5s ease;
+
+        }
+
+
+        #mainContent.visible {
+
+            opacity: 1;
+
+            transform:
+                scale(1);
+
+        }
+
+
+
+        /* =========================
+           CONSTELACIÓN
+        ========================= */
+
+        .constellation-container {
+
+            width:
+                min(
+                    94vw,
+                    620px
+                );
+
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            animation:
+                floating
+                7s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .constellation {
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+            user-select: none;
+
+            pointer-events: none;
+
+            filter:
+                drop-shadow(
+                    0 0 10px
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        .15
+                    )
+                );
+
+        }
+
+
+
+        @keyframes floating {
+
+            0% {
+
+                transform:
+                    translateY(0px)
+                    scale(1);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-7px)
+                    scale(1.005);
+
+            }
+
+            100% {
+
+                transform:
+                    translateY(0px)
+                    scale(1);
+
+            }
+
+        }
+
+
+
+        /* =========================
+           ESTRELLAS BRILLANTES
+        ========================= */
+
+        .sparkle {
+
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            box-shadow:
+                0 0 5px white,
+                0 0 10px white;
+
+            animation:
+                sparkle
+                3s
+                infinite;
+
+        }
+
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+
+                opacity: 0;
+
+                transform:
+                    scale(.5);
+
+            }
+
+            50% {
+
+                opacity: 1;
+
+                transform:
+                    scale(1.8);
+
+            }
+
+        }
+
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .constellation-container {
+
+                width:
+                    98vw;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         PANTALLA INICIAL
+    ========================= -->
+
+    <div id="intro">
+
+        <p class="intro-text">
+            Antes de continuar...
+        </p>
+
+        <button id="playMusic">
+
+            ♫ Reproducir música
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         ESTRELLAS DE FONDO
+    ========================= -->
+
+    <canvas id="stars"></canvas>
+
+
+
+    <!-- =========================
+         CONTENIDO PRINCIPAL
+    ========================= -->
+
+    <main id="mainContent">
+
+        <div
+            class="constellation-container"
+            id="constellation"
+        >
+
+            <img
+                src="assets/constelacion.png"
+                class="constellation"
+                alt="Nuestro primer beso"
+            >
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================
+         MÚSICA
+    ========================= -->
+
+    <audio
+        id="music"
+        preload="auto"
+        loop
+    >
+
+        <source
+            src="assets/musica.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+
+<script>
+
+
+/* ================================
+   MÚSICA + ENTRADA
+================================ */
+
+
+const intro =
+    document.getElementById(
+        "intro"
+    );
+
+
+const playMusic =
+    document.getElementById(
+        "playMusic"
+    );
+
+
+const music =
+    document.getElementById(
+        "music"
+    );
+
+
+const mainContent =
+    document.getElementById(
+        "mainContent"
+    );
+
+
+
+playMusic.addEventListener(
+
+    "click",
+
+    async () => {
+
+
+        try {
+
+
+            /* Comienza la música */
+
+            await music.play();
+
+
+
+            /* Ocultamos pantalla inicial */
+
+            intro.classList.add(
+                "hidden"
+            );
+
+
+
+            /*
+            Esperamos un poquito
+            para que la transición
+            se vea elegante.
+            */
+
+            setTimeout(
+
+                () => {
+
+                    mainContent.classList.add(
+                        "visible"
+                    );
+
+                },
+
+                400
+
+            );
+
+
+        }
+
+        catch (error) {
+
+
+            console.error(
+                "No se pudo reproducir la música",
+                error
+            );
+
+
+        }
+
+
+    }
+
+);
+
+
+
+/* ================================
+   ESTRELLAS DEL FONDO
+================================ */
+
+
+const canvas =
+    document.getElementById(
+        "stars"
+    );
+
+
+const ctx =
+    canvas.getContext(
+        "2d"
+    );
+
+
+let stars = [];
+
+
+
+function resizeCanvas() {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+
+
+resizeCanvas();
+
+
+
+window.addEventListener(
+
+    "resize",
+
+    () => {
+
+        resizeCanvas();
+
+        createStars();
+
+    }
+
+);
+
+
+
+function createStars() {
+
+
+    stars = [];
+
+
+    const amount =
+
+        Math.floor(
+
+            (
+                window.innerWidth *
+                window.innerHeight
+            )
+
+            /
+
+            9000
+
+        );
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+
+        stars.push({
+
+            x:
+                Math.random()
+                *
+                canvas.width,
+
+            y:
+                Math.random()
+                *
+                canvas.height,
+
+            radius:
+                Math.random()
+                *
+                1.2
+                +
+                .2,
+
+            opacity:
+                Math.random(),
+
+            speed:
+                Math.random()
+                *
+                .015
+                +
+                .005,
+
+            direction:
+                Math.random() > .5
+                ?
+                1
+                :
+                -1
+
+        });
+
+
+    }
+
+
+}
+
+
+
+createStars();
+
+
+
+function animateStars() {
+
+
+    ctx.clearRect(
+
+        0,
+        0,
+
+        canvas.width,
+        canvas.height
+
+    );
+
+
+    stars.forEach(
+
+        star => {
+
+
+            star.opacity +=
+
+                star.speed
+                *
+                star.direction;
+
+
+            if (
+                star.opacity >= 1
+            ) {
+
+                star.opacity = 1;
+
+                star.direction = -1;
+
+            }
+
+
+            if (
+                star.opacity <= .15
+            ) {
+
+                star.opacity = .15;
+
+                star.direction = 1;
+
+            }
+
+
+            ctx.beginPath();
+
+
+            ctx.arc(
+
+                star.x,
+
+                star.y,
+
+                star.radius,
+
+                0,
+
+                Math.PI * 2
+
+            );
+
+
+            ctx.fillStyle =
+
+                `rgba(
+                    255,
+                    255,
+                    255,
+                    ${star.opacity}
+                )`;
+
+
+            ctx.fill();
+
+
+        }
+
+    );
+
+
+    requestAnimationFrame(
+        animateStars
+    );
+
+
+}
+
+
+
+animateStars();
+
+
+
+/* ================================
+   BRILLOS SOBRE CONSTELACIÓN
+================================ */
+
+
+const constellation =
+
+    document.getElementById(
+        "constellation"
+    );
+
+
+
+function createSparkles() {
+
+
+    const amount = 30;
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+
+        const sparkle =
+
+            document.createElement(
+                "span"
+            );
+
+
+        sparkle.classList.add(
+            "sparkle"
+        );
+
+
+        sparkle.style.left =
+
+            (
+                15
+                +
+                Math.random()
+                *
+                70
+            )
+            +
+            "%";
+
+
+        sparkle.style.top =
+
+            (
+                8
+                +
+                Math.random()
+                *
+                65
+            )
+            +
+            "%";
+
+
+        sparkle.style.animationDelay =
+
+            (
+                Math.random()
+                *
+                5
+            )
+            +
+            "s";
+
+
+        sparkle.style.animationDuration =
+
+            (
+                2
+                +
+                Math.random()
+                *
+                4
+            )
+            +
+            "s";
+
+
+        constellation.appendChild(
+            sparkle
+        );
+
+
+    }
+
+
+}
+
+
+
+createSparkles();
+
+
+</script>
+
+
+</body>
+
+</html>
